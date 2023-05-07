@@ -14,14 +14,15 @@ function App() {
   const [temp, setTemp] = useState('');
   const [temp_max, setTempmax] = useState('');
   const [temp_min, setTempMin] = useState('');
+  const [prelocation, setPrelocation] = useState('');
 
   useEffect(() => {
     fetchLocationData();
-  }, []);
+  }, [0]);
 
   useEffect(() => {
     fetchWeatherData();
-  }, []);
+  }, [0]);
 
   const fetchLocationData = async () => {
     const response = await fetch(
@@ -49,10 +50,11 @@ function App() {
     setHumidity(humidity);
     setFeels_like(feels_like);
   };
+  const finaldone = event => {};
 
   return (
-    <div>
-      {/* <p>This is sakar pudasaini</p>
+    <div className="app">
+      <p>This is sakar pudasaini</p>
       <p>Latitude: {latitude}</p>
       <p>Longitude: {longitude}</p>
       <p>temp min: {temp_min}</p>
@@ -60,7 +62,19 @@ function App() {
       <p>temp: {temp}</p>
       <p>pressure: {pressure}</p>
       <p>humadity: {humidity}</p>
-      <p>feelslike: {feels_like}</p> */}
+      <p>feelslike: {feels_like}</p>
+
+      <div className="searchbar">
+        <input
+          className="search"
+          type="text"
+          value={prelocation}
+          onChange={event => setPrelocation(event.target.value)}
+          placeholder="Enter Your Location"
+          onKeyDown={finaldone}
+        />
+      </div>
+      {/* <p>{prelocation}</p> */}
 
       <div className="container">
         <div className="top">
@@ -76,14 +90,21 @@ function App() {
         </div>
         <div className="bottom">
           <div className="fleels">
-            <p>35°F</p>
+            <p className="bold">35°F</p>
+            <p>Feels like</p>
           </div>
           <div className="humidity">
-            <p>20%</p>
+            <p className="bold">20%</p>
+            <p>Humidity</p>
           </div>
           <div className="wind">
-            <p>12 MPH</p>
+            <p className="bold">12 MPH</p>
+            <p>Wind Speed</p>
           </div>
+          {/* <div className="pressure">
+            <p className="bold">12 MPH</p>
+            <p>Pressure</p>
+          </div> */}
         </div>
       </div>
     </div>
